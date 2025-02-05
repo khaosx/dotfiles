@@ -1,0 +1,17 @@
+# .aliases - Zsh Command Aliases
+# Author: Kristopher Newman
+# Date: 2025-02-05 (added to chezmoi)
+#
+# This file (or section) contains aliases for common commands.  They are
+# used to shorten commands and improve command-line efficiency.
+
+alias brewup='brew bundle; brew cleanup; brew doctor'
+
+alias makerole='ansible-galaxy init --init-path=/Users/kris/admin/ansible/roles'
+alias aplay='ansible-playbook -i hosts'
+alias alint='ansible-lint'
+
+alias gadd='git add'
+alias gcom='git commit'
+alias gstat='git status'
+alias gpush='git push'
