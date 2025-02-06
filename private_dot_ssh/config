@@ -11,9 +11,9 @@ Host *.khaosx.io
 
 # Wildcard settings
 
-Host *            # Default settings for all hosts (can be overridden)
-    ForwardX11 no      # Disable X11 forwarding by default (for security)
-    ControlMaster auto  # Enable connection multiplexing (optional, speeds up connections)
-    # StrictHostKeyChecking no # Disable host key checking (less secure, use with caution!)
-    # UserKnownHostsFile=/dev/null # Disable checking known_hosts file (less secure, use with extreme caution!)
-    IdentityFile ~/.ssh/id_rsa_kris
+Host *                                # Default settings for all hosts (can be overridden)
+    ForwardX11 no                     # Disable X11 forwarding by default (for security)
+    ControlMaster auto                # Enable connection multiplexing (optional, speeds up connections)
+    # StrictHostKeyChecking no        # Disable host key checking (less secure, use with caution!)
+    # UserKnownHostsFile=/dev/null    # Disable checking known_hosts file (less secure, use with extreme caution!)
+    IdentityFile ~/.ssh/id_rsa_kris   # Identity file to use
