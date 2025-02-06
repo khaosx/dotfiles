@@ -7,7 +7,7 @@
 
 alias brewup='brew bundle; brew cleanup; brew doctor'
 
-alias makerole='ansible-galaxy init --init-path=/Users/kris/admin/ansible/roles'
+alias makerole='ansible-galaxy init --init-path=$HOME/admin/ansible/roles'
 alias aplay='ansible-playbook -i hosts'
 alias alint='ansible-lint'
 
