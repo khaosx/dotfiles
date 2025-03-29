@@ -1,6 +1,6 @@
 # .zprofile - Zsh Profile Configuration
 # Author: Kristopher Newman
-# Date: 2025-02-05 (added to chezmoi)
+# Date: 2025-02-05
 #
 # This file is sourced whenever a new interactive non-login shell is started.
 # It is used to set aliases, define functions, set shell options, and customize

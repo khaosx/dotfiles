@@ -1,6 +1,6 @@
 # .zprofile - Zsh Profile Configuration
 # Author: Kristopher Newman
-# Date: 2025-02-05 (added to chezmoi)
+# Date: 2025-02-05
 #
 # This file is sourced only once, at the start of an interactive login shell.
 # It is used to set environment variables, define functions, and run commands

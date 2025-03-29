@@ -1,8 +1,7 @@
-tap "homebrew/bundle"
+# This Brewfile is used to install all the necessary packages and applications for a new macOS setup.
 brew "ansible"
 brew "ansible-lint"
 brew "cask"
-brew "chezmoi"
 brew "dockutil"
 brew "git"
 brew "jq"
