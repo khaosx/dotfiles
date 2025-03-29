@@ -1,2 +1,2 @@
 # dotfiles
-Repo for my chezmoi-managed dotfiles
+Repo for my dotfiles
