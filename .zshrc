@@ -1,4 +1,4 @@
-# .zprofile - Zsh Profile Configuration
+# .zshrc - Zsh Profile Configuration
 # Author: Kristopher Newman
 # Date: 2025-02-05
 #
