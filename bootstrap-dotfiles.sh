@@ -4,7 +4,7 @@
 # Script Name: bootstrap-dotfiles.sh
 # Description: This script sets up and manages dotfiles from a GitHub repository.
 #              It ensures directories are created, and only files within are 
-#              linked or updated as needed. Hidden files are now included.
+#              linked or updated as needed. Hidden files are included.
 #
 # Usage: 
 #   1. Make the script executable:
@@ -50,8 +50,8 @@ for item in "$DOTFILES_DIR"/*; do
     item_name=$(basename "$item")
     target_item="$TARGET_DIR/$item_name"
 
-    # Skip excluded files
-    if [ "$item_name" == "README.md" ] || [ "$item_name" == "bootstrap-dotfiles.sh" ]; then
+    # Skip excluded files and directories
+    if [ "$item_name" == "README.md" ] || [ "$item_name" == "bootstrap-dotfiles.sh" ] || [ "$item_name" == ".git" ]; then
         echo "Skipping $item_name: excluded from processing."
         continue
     fi
