@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 # ===================================================================================
 # Script Name: bootstrap-dotfiles.sh
@@ -32,7 +32,7 @@ else
     # Fetch the latest changes and check if there are updates
     git fetch
     LOCAL_HASH=$(git rev-parse HEAD)
-    REMOTE_HASH=$(git rev-parse @{u})
+    REMOTE_HASH=$(git rev-parse '@{u}')
 
     if [ "$LOCAL_HASH" != "$REMOTE_HASH" ]; then
         echo "Local repository is outdated. Pulling latest changes..."
@@ -44,35 +44,35 @@ fi
 
 # Step 2: Update symbolic links for files, ensuring directories exist
 echo "Processing dotfiles (including hidden files)..."
-shopt -s dotglob # Enable the inclusion of hidden files
-for item in "$DOTFILES_DIR"/*; do
+setopt dotglob # Enable the inclusion of hidden files
+for item in $DOTFILES_DIR/*; do
     # Get the basename of the file or directory
     item_name=$(basename "$item")
     target_item="$TARGET_DIR/$item_name"
 
     # Skip excluded files and directories
-    if [ "$item_name" == "README.md" ] || [ "$item_name" == "bootstrap-dotfiles.sh" ] || [ "$item_name" == ".git" ]; then
+    if [[ "$item_name" == "README.md" || "$item_name" == "bootstrap-dotfiles.sh" || "$item_name" == ".git" ]]; then
         echo "Skipping $item_name: excluded from processing."
         continue
     fi
 
     # Handle directories
-    if [ -d "$item" ]; then
+    if [[ -d "$item" ]]; then
         echo "Processing directory: $item_name"
 
         # Ensure the target directory exists
-        if [ ! -d "$target_item" ]; then
+        if [[ ! -d "$target_item" ]]; then
             echo "Creating target directory: $target_item"
             mkdir -p "$target_item"
         fi
 
         # Create or update symbolic links for files inside the directory
-        for file in "$item"/*; do
+        for file in $item/*; do
             file_name=$(basename "$file")
             target_file="$target_item/$file_name"
 
             # Remove existing symbolic links or files
-            if [ -e "$target_file" ] || [ -L "$target_file" ]; then
+            if [[ -e "$target_file" || -L "$target_file" ]]; then
                 echo "Removing existing $target_file..."
                 rm -rf "$target_file"
             fi
@@ -86,7 +86,7 @@ for item in "$DOTFILES_DIR"/*; do
         echo "Processing file: $item_name"
 
         # Remove existing symbolic links or files
-        if [ -e "$target_item" ] || [ -L "$target_item" ]; then
+        if [[ -e "$target_item" || -L "$target_item" ]]; then
             echo "Removing existing $target_item..."
             rm -rf "$target_item"
         fi
@@ -96,6 +96,6 @@ for item in "$DOTFILES_DIR"/*; do
         echo "Linked $item to $target_item"
     fi
 done
-shopt -u dotglob # Restore default behavior
+unsetopt dotglob # Restore default behavior
 
 echo "Dotfiles setup and updates completed."
