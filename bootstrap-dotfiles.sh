@@ -97,5 +97,6 @@ for item in $DOTFILES_DIR/*; do
     fi
 done
 unsetopt dotglob # Restore default behavior
+source ~/.zshrc
 
 echo "Dotfiles setup and updates completed."
