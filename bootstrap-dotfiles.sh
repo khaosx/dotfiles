@@ -4,7 +4,7 @@
 # Script Name: bootstrap-dotfiles.sh
 # Description: This script sets up and manages dotfiles from a GitHub repository.
 #              It ensures directories are created, and only files within are 
-#              linked or updated as needed.
+#              linked or updated as needed. Hidden files are now included.
 #
 # Usage: 
 #   1. Make the script executable:
@@ -43,7 +43,8 @@ else
 fi
 
 # Step 2: Update symbolic links for files, ensuring directories exist
-echo "Processing dotfiles..."
+echo "Processing dotfiles (including hidden files)..."
+shopt -s dotglob # Enable the inclusion of hidden files
 for item in "$DOTFILES_DIR"/*; do
     # Get the basename of the file or directory
     item_name=$(basename "$item")
@@ -95,5 +96,6 @@ for item in "$DOTFILES_DIR"/*; do
         echo "Linked $item to $target_item"
     fi
 done
+shopt -u dotglob # Restore default behavior
 
 echo "Dotfiles setup and updates completed."
