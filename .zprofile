@@ -15,9 +15,10 @@ export PATH="$HOME/bin:$PATH"
 # Environment Variables:
 ## Set brew update to only run once a week
 export HOMEBREW_AUTO_UPDATE_SECS=604800
-
 ## Define location of Brew bundle
 export HOMEBREW_BUNDLE_FILE="$HOME/.Brewfile"
+## Set location for ansible config file
+export ANSIBLE_CONFIG="$HOME/.ansible.cfg"
 
 ## I won't fucking use VIM, ever. Stop trying to make it a thing.
 export EDITOR=nano
