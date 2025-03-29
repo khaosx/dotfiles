@@ -26,4 +26,14 @@ export CLICOLOR_FORCE=1
 # Prompt Customization:
 export PROMPT='%F{green}%n@%m%f %F{blue}%~%f $ '
 
+# Set your RPROMPT to include Git branch information
+RPROMPT='%F{yellow}$(git_prompt_info)%f'
+
+# Configure how Git information appears in the prompt
+ZSH_THEME_GIT_PROMPT_PREFIX=" "  # Symbol before the branch name
+ZSH_THEME_GIT_PROMPT_SUFFIX=""    # No suffix after the branch name
+ZSH_THEME_GIT_PROMPT_CLEAN=""     # For a clean working directory
+ZSH_THEME_GIT_PROMPT_DIRTY="%F{red}*%f"  # Shows a red asterisk for changes
+
+
 # EOF
