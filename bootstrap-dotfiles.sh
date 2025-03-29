@@ -3,13 +3,8 @@
 # ===================================================================================
 # Script Name: bootstrap-dotfiles.sh
 # Description: This script sets up and manages dotfiles from a GitHub repository.
-#              It performs the following steps:
-#              1. Clones the dotfiles repository if it doesn't exist locally.
-#              2. Checks if the local repository is up to date with the remote one.
-#              3. Pulls the latest changes if the local repository is outdated.
-#              4. Creates or updates symbolic links for dotfiles in $HOME.
-#              5. Excludes specified files (README.md and bootstrap-dotfiles.sh) 
-#                 from being linked.
+#              It ensures directories are created, and only files within are 
+#              linked or updated as needed.
 #
 # Usage: 
 #   1. Make the script executable:
@@ -17,12 +12,8 @@
 #   2. Run the script:
 #      ./bootstrap-dotfiles.sh
 #
-# Notes:
-#   - Ensure that 'git' is installed and accessible in your system.
-#   - Existing symbolic links or files in $HOME with the same name as dotfiles 
-#     will be replaced.
-#
 # Author: Kristopher Newman
+# Copyright: © 2025 Kristopher Newman
 # ===================================================================================
 
 # Define the source and target directories
@@ -51,8 +42,8 @@ else
     fi
 fi
 
-# Step 2: Iterate over the contents of the dotfiles directory and update symbolic links
-echo "Updating symbolic links for dotfiles..."
+# Step 2: Update symbolic links for files, ensuring directories exist
+echo "Processing dotfiles..."
 for item in "$DOTFILES_DIR"/*; do
     # Get the basename of the file or directory
     item_name=$(basename "$item")
@@ -60,19 +51,49 @@ for item in "$DOTFILES_DIR"/*; do
 
     # Skip excluded files
     if [ "$item_name" == "README.md" ] || [ "$item_name" == "bootstrap-dotfiles.sh" ]; then
-        echo "Skipping $item_name: excluded from symbolic link creation."
+        echo "Skipping $item_name: excluded from processing."
         continue
     fi
 
-    # Remove existing symbolic links or files
-    if [ -e "$target_item" ] || [ -L "$target_item" ]; then
-        echo "Removing existing $target_item..."
-        rm -rf "$target_item"
-    fi
+    # Handle directories
+    if [ -d "$item" ]; then
+        echo "Processing directory: $item_name"
 
-    # Create symbolic links for files and directories
-    ln -s "$item" "$target_item"
-    echo "Linked $item to $target_item"
+        # Ensure the target directory exists
+        if [ ! -d "$target_item" ]; then
+            echo "Creating target directory: $target_item"
+            mkdir -p "$target_item"
+        fi
+
+        # Create or update symbolic links for files inside the directory
+        for file in "$item"/*; do
+            file_name=$(basename "$file")
+            target_file="$target_item/$file_name"
+
+            # Remove existing symbolic links or files
+            if [ -e "$target_file" ] || [ -L "$target_file" ]; then
+                echo "Removing existing $target_file..."
+                rm -rf "$target_file"
+            fi
+
+            # Create symbolic link
+            ln -s "$file" "$target_file"
+            echo "Linked $file to $target_file"
+        done
+    else
+        # Handle files directly in the dotfiles directory
+        echo "Processing file: $item_name"
+
+        # Remove existing symbolic links or files
+        if [ -e "$target_item" ] || [ -L "$target_item" ]; then
+            echo "Removing existing $target_item..."
+            rm -rf "$target_item"
+        fi
+
+        # Create symbolic link
+        ln -s "$item" "$target_item"
+        echo "Linked $item to $target_item"
+    fi
 done
 
 echo "Dotfiles setup and updates completed."
