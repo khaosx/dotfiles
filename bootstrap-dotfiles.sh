@@ -2,15 +2,16 @@
 
 # ===================================================================================
 # Script Name: bootstrap-dotfiles.sh
-# Description: This script sets up and manages dotfiles from a GitHub repository.
-#              It ensures directories are created, and only files within are 
-#              linked or updated as needed. Hidden files are included.
+# Description: This script sets up, manages, and can destroy dotfiles from a GitHub repository.
+#              Hidden files are included. Includes a `destroy` function for cleanup.
 #
 # Usage: 
 #   1. Make the script executable:
 #      chmod +x bootstrap-dotfiles.sh
 #   2. Run the script:
 #      ./bootstrap-dotfiles.sh
+#   3. To destroy symbolic links:
+#      ./bootstrap-dotfiles.sh --destroy
 #
 # Author: Kristopher Newman
 # Copyright: © 2025 Kristopher Newman
@@ -20,6 +21,30 @@
 DOTFILES_REPO="https://github.com/khaosx/dotfiles.git"
 DOTFILES_DIR="$HOME/dotfiles"
 TARGET_DIR="$HOME"
+
+# Function to destroy symbolic links
+destroy() {
+    echo "Destroying symbolic links in $DOTFILES_DIR..."
+    setopt dotglob # Enable hidden files
+    for item in "$DOTFILES_DIR"/*; do
+        item_name=$(basename "$item")
+        target_item="$TARGET_DIR/$item_name"
+        
+        # Remove symbolic links only
+        if [[ -L "$target_item" ]]; then
+            echo "Removing symbolic link: $target_item"
+            rm -f "$target_item"
+        fi
+    done
+    unsetopt dotglob # Restore default behavior
+    echo "Symbolic links removed successfully."
+}
+
+# Check for the '--destroy' parameter
+if [[ "$1" == "--destroy" ]]; then
+    destroy
+    exit 0
+fi
 
 # Step 1: Clone the repository if it doesn't already exist
 if [ ! -d "$DOTFILES_DIR" ]; then
