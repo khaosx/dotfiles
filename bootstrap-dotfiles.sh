@@ -19,7 +19,7 @@
 
 # Define the source and target directories
 DOTFILES_REPO="https://github.com/khaosx/dotfiles.git"
-DOTFILES_DIR="$HOME/dotfiles"
+DOTFILES_DIR="$HOME/.dotfiles"  # Changed to hidden directory
 TARGET_DIR="$HOME"
 
 # Function to destroy symbolic links
