@@ -1,17 +1,22 @@
-# This Brewfile is used to install all the necessary packages and applications for a new macOS setup.
+tap "hashicorp/tap"
 brew "ansible"
 brew "ansible-lint"
 brew "cask"
+brew "chezmoi"
 brew "dockutil"
+brew "doppler"
 brew "git"
 brew "jq"
 brew "mas"
+brew "midnight-commander"
+brew "opentofu"
 brew "wget"
+brew "hashicorp/tap/packer"
 cask "1password"
 cask "bambu-studio"
 cask "makemkv"
 cask "microsoft-edge"
-cask "vscodium"
+cask "visual-studio-code"
 mas "AudioBookBinder", id: 413969927
 mas "AutoMounter", id: 1160435653
 mas "Controller", id: 1198176727
@@ -37,3 +42,14 @@ mas "Slack", id: 803453959
 mas "VPNAutoConnect", id: 532510878
 mas "Windows App", id: 1295203466
 mas "WireGuard", id: 1451685025
+vscode "gamunu.opentofu"
+vscode "github.copilot"
+vscode "github.copilot-chat"
+vscode "ms-python.debugpy"
+vscode "ms-python.python"
+vscode "ms-python.vscode-pylance"
+vscode "ms-vscode-remote.remote-ssh"
+vscode "ms-vscode-remote.remote-ssh-edit"
+vscode "ms-vscode.remote-explorer"
+vscode "redhat.ansible"
+vscode "redhat.vscode-yaml"
