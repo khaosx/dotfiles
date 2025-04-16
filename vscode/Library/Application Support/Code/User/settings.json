@@ -1,0 +1,13 @@
+{
+    "git.defaultCloneDirectory": "$HOME/dev",
+    "git.autofetch": true,
+    "window.confirmSaveUntitledWorkspace": false,
+    "git.enableSmartCommit": true,
+    "explorer.confirmDelete": false,
+    "editor.parameterHints.enabled": false,
+    "workbench.settings.applyToAllProfiles": [
+        "editor.parameterHints.enabled"
+    ],
+    "explorer.confirmDragAndDrop": false,
+    "git.confirmSync": false
+}
