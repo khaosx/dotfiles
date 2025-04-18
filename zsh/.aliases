@@ -5,7 +5,9 @@
 # This file (or section) contains aliases for common commands.  They are
 # used to shorten commands and improve command-line efficiency.
 
-alias brewup='brew bundle; brew cleanup; brew doctor'
+alias brewup='brew bundle; brew cleanup; brew doctor; brew bundle dump --global'
+alias makedots='$HOME/configs/link_configs_manual.sh'
+alias gitdots='cd $HOME/configs; git add -A; git commit -am "Routine Updates"; git push'
 
 alias makerole='ansible-galaxy init --init-path=$HOME/admin/ansible/roles'
 alias aplay='ansible-playbook -i hosts'
