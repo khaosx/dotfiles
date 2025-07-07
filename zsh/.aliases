@@ -5,7 +5,7 @@
 # This file (or section) contains aliases for common commands.  They are
 # used to shorten commands and improve command-line efficiency.
 
-alias brewup='brew bundle; brew cleanup; brew doctor; brew bundle dump --global'
+alias brewup='brew bundle; brew cleanup; brew doctor; brew bundle dump --force'
 alias makedots='$HOME/configs/link_configs_manual.sh'
 alias gitdots='cd $HOME/configs; git add -A; git commit -am "Routine Updates"; git push'
 
@@ -17,3 +17,5 @@ alias gadd='git add'
 alias gcom='git commit'
 alias gstat='git status'
 alias gpush='git push'
+alias hostkey='ssh-keygen -f .ssh/known_hosts -R '
+alias mtxt="merge_dir_to_txt"

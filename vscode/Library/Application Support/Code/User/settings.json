@@ -9,5 +9,8 @@
         "editor.parameterHints.enabled"
     ],
     "explorer.confirmDragAndDrop": false,
-    "git.confirmSync": false
+    "git.confirmSync": false,
+    "python.defaultInterpreterPath": "/opt/homebrew/bin/python3",
+    "diffEditor.codeLens": true,
+    "inlineChat.accessibleDiffView": "off"
 }
