@@ -3,14 +3,24 @@
 # Script to create symbolic links for dotfiles
 # Source files are expected in ~/Projects/dotfiles
 # Target links are created in $HOME
+#
+# Usage: ./link_configs_manual.sh [--force]
+#   --force  Remove existing files/links and regenerate all symlinks
+
+# Parse arguments
+FORCE=false
+if [[ "$1" == "--force" || "$1" == "-f" ]]; then
+    FORCE=true
+fi
 
 # Define base directories
 CONFIGS_DIR="$HOME/Projects/dotfiles"
-TARGET_DIR="$HOME" # Usually $HOME, but keep flexible if needed
+TARGET_DIR="$HOME"
 
 echo "Starting dotfile symlink creation..."
 echo "Source directory: $CONFIGS_DIR"
 echo "Target directory: $TARGET_DIR"
+[[ "$FORCE" == true ]] && echo "Mode: FORCE (will remove existing files)"
 echo "---"
 
 # Define the links:
@@ -42,19 +52,15 @@ for (( i=0; i<${#links[@]}; i+=2 )); do
     full_target_path="$TARGET_DIR/$target_rel_path"
 
     echo "Processing: $target_rel_path"
-    echo "  Source: $full_source_path"
-    echo "  Target: $full_target_path"
 
-    # --- Pre-checks ---
-
-    # 1. Check if the source file/directory exists
+    # Check if the source file/directory exists
     if [ ! -e "$full_source_path" ]; then
         echo "  [SKIP] Source does not exist: $full_source_path"
         echo "---"
-        continue # Skip to the next link definition
+        continue
     fi
 
-    # 2. Ensure the target directory exists before creating the link
+    # Ensure the target directory exists before creating the link
     target_dir=$(dirname "$full_target_path")
     if [ ! -d "$target_dir" ]; then
         echo "  Creating target directory: $target_dir"
@@ -62,36 +68,33 @@ for (( i=0; i<${#links[@]}; i+=2 )); do
         if [ $? -ne 0 ]; then
             echo "  [ERROR] Failed to create target directory: $target_dir"
             echo "---"
-            continue # Skip if directory creation failed
+            continue
         fi
     fi
 
-    # --- Link Creation / Check ---
+    # Handle --force: remove existing file/link
+    if [[ "$FORCE" == true && -e "$full_target_path" ]]; then
+        echo "  Removing existing: $full_target_path"
+        rm -f "$full_target_path"
+    fi
 
-    # 3. Check if the target already exists
+    # Check if the target already exists
     if [ -L "$full_target_path" ]; then
-        # Target exists and is a symlink
         current_link_target=$(readlink "$full_target_path")
         if [ "$current_link_target" == "$full_source_path" ]; then
             echo "  [OK] Link already exists and points correctly."
         else
             echo "  [WARN] Link exists but points to '$current_link_target'."
-            echo "         Consider removing it manually and re-running: rm \"$full_target_path\""
-            # If you want to automatically overwrite, replace the above 'echo' lines with:
-            # echo "  Overwriting existing link..."
-            # ln -sf "$full_source_path" "$full_target_path"
+            echo "         Run with --force to replace, or remove manually."
         fi
     elif [ -e "$full_target_path" ]; then
-        # Target exists but is not a symlink (it's a regular file or directory)
         echo "  [WARN] Target exists but is not a symlink: $full_target_path"
-        echo "         Please back up and remove it manually if you want a link."
+        echo "         Run with --force to replace, or back up and remove manually."
     else
         # Target does not exist, create the symlink
-        echo "  Creating symlink..."
-        # Use ln -s to create the symbolic link
         ln -s "$full_source_path" "$full_target_path"
         if [ $? -eq 0 ]; then
-            echo "  [OK] Link created successfully."
+            echo "  [OK] Link created."
         else
             echo "  [ERROR] Failed to create symlink."
         fi

@@ -1,12 +1,68 @@
-# My Dotfiles
+# Dotfiles
 
-This repository contains my personal configuration files (dotfiles) for setting up my development environment on macOS and Linux systems.
+Personal configuration files for macOS.
 
-## Management Method
-These dotfiles are managed using the Git bare repository technique. This method allows tracking files directly in the home directory without needing symlinks for most files (except where the target location is outside ~, like VSCode settings).   
+## Contents
 
-## Structure
-The files within this repository are organized to mirror their target locations within the $HOME directory. For example:
-- .zshrc is stored as zsh/.zshrc in the repo but targets ~/.zshrc.
-- .gitconfig is stored as git/.gitconfig in the repo but targets ~/.gitconfig.
-- VSCode's settings.json is stored under vscode/Library/Application\ Support/Code/User/settings.json to reflect its target path ~/Library/Application Support/Code/User/settings.json.
+| Directory | Files | Purpose |
+|-----------|-------|---------|
+| `git/` | `.gitconfig`, `.gitignore`, `.gitmessage` | Git configuration, global ignores, commit template |
+| `ssh/` | `.ssh/config` | SSH host configurations and defaults |
+| `zsh/` | `.zshrc`, `.zprofile`, `.aliases` | Shell configuration, environment variables, aliases |
+| `.Brewfile` | - | Homebrew packages, casks, and Mac App Store apps |
+
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone git@github.com:khaosx/dotfiles.git ~/Projects/dotfiles
+   ```
+
+2. Run the linking script:
+   ```bash
+   ~/Projects/dotfiles/link_configs_manual.sh
+   ```
+
+   Use `--force` to replace existing files:
+   ```bash
+   ~/Projects/dotfiles/link_configs_manual.sh --force
+   ```
+
+3. Install Homebrew packages:
+   ```bash
+   brew bundle --file=~/.Brewfile
+   ```
+
+4. Reload shell:
+   ```bash
+   source ~/.zprofile && source ~/.zshrc
+   ```
+
+## Updating
+
+After making changes to live config files, sync back to the repo:
+```bash
+gitdots   # alias: commits and pushes with "Routine Updates" message
+```
+
+Or manually:
+```bash
+cd ~/Projects/dotfiles
+git add -A
+git commit -m "Your message"
+git push
+```
+
+## Key Aliases
+
+| Alias | Description |
+|-------|-------------|
+| `brewup` | Update Homebrew, cleanup, run doctor, dump Brewfile |
+| `makedots` | Run the symlink script |
+| `gitdots` | Commit and push dotfiles |
+| `keyfix <host>` | Refresh SSH known_hosts for a host |
+
+## Notes
+
+- VS Code settings are managed via VS Code's built-in Settings Sync
+- The global `.gitignore` covers OS/editor files only; project-specific ignores belong in each repo
