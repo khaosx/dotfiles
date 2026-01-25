@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # Script to create symbolic links for dotfiles
-# Source files are expected in ~/configs
+# Source files are expected in ~/Projects/dotfiles
 # Target links are created in $HOME
 
 # Define base directories
-CONFIGS_DIR="$HOME/configs"
+CONFIGS_DIR="$HOME/Projects/dotfiles"
 TARGET_DIR="$HOME" # Usually $HOME, but keep flexible if needed
 
 echo "Starting dotfile symlink creation..."
@@ -16,14 +16,14 @@ echo "---"
 # Define the links:
 # Each pair is: "Source Path (relative to CONFIGS_DIR)" "Target Path (relative to TARGET_DIR)"
 links=(
-    ".Brewfile"                                                       ".Brewfile"
-    "git/.gitconfig"                                                 ".gitconfig"
-    "git/.gitmessage"                                                ".gitmessage"
-    "ssh/.ssh/config"                                                ".ssh/config"
-    "vscode/Library/Application Support/Code/User/settings.json"     "Library/Application Support/Code/User/settings.json"
-    "zsh/.aliases"                                                   ".aliases"
-    "zsh/.zprofile"                                                  ".zprofile"
-    "zsh/.zshrc"                                                     ".zshrc"
+    ".Brewfile"           ".Brewfile"
+    "git/.gitconfig"      ".gitconfig"
+    "git/.gitignore"      ".gitignore"
+    "git/.gitmessage"     ".gitmessage"
+    "ssh/.ssh/config"     ".ssh/config"
+    "zsh/.aliases"        ".aliases"
+    "zsh/.zprofile"       ".zprofile"
+    "zsh/.zshrc"          ".zshrc"
 )
 
 # Ensure links array has an even number of elements (pairs)

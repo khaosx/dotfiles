@@ -26,27 +26,5 @@ export CLICOLOR_FORCE=1
 # Prompt Customization:
 export PROMPT='%F{green}%n@%m%f %F{blue}%~%f $ '
 
-function merge_files() {
-  # Get the name of the current directory.
-  local output_file="${PWD##*/}.txt"
-
-  # Check if the output file already exists and remove it to start fresh.
-  if [[ -f "$output_file" ]]; then
-    rm "$output_file"
-  fi
-
-  # Loop through all files in the current directory.
-  for file in *; do
-    # Check if the item is a file and not the output file itself.
-    if [[ -f "$file" ]] && [[ "$file" != "$output_file" ]]; then
-      # Append a comment with the filename to the output file.
-      echo "### START OF FILE: $file ###" >> "$output_file"
-      # Append the content of the file to the output file.
-      cat "$file" >> "$output_file"
-      # Append a newline for separation.
-      echo "\n### END OF FILE: $file ###\n" >> "$output_file"
-    fi
-  done
-
-  echo "All files have been merged into $output_file"
-}
+# Path modifications:
+export PATH="$HOME/.local/bin:$PATH"

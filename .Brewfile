@@ -1,4 +1,6 @@
 tap "hashicorp/tap"
+
+# CLI Tools
 brew "ansible"
 brew "ansible-lint"
 brew "cask"
@@ -6,27 +8,37 @@ brew "chezmoi"
 brew "cowsay"
 brew "dockutil"
 brew "doppler"
+brew "gh"
 brew "git"
 brew "jq"
 brew "mas"
 brew "midnight-commander"
+brew "node"
 brew "pipx"
 brew "tree"
 brew "wget"
 brew "hashicorp/tap/packer"
 brew "hashicorp/tap/terraform"
+
+# Applications
 cask "1password"
 cask "1password-cli"
 cask "bambu-studio"
+cask "claude-code"
 cask "google-chrome"
+cask "iina"
 cask "makemkv"
 cask "microsoft-edge"
+cask "plex"
 cask "powershell"
 cask "visual-studio-code"
+
+# Mac App Store
 mas "AudioBookBinder", id: 413969927
 mas "AutoMounter", id: 1160435653
 mas "Blackmagic Disk Speed Test", id: 425264550
 mas "ControllerForHomeKit", id: 1198176727
+mas "FileBot", id: 905384638
 mas "Full Deck Solitaire", id: 412980789
 mas "HomePass", id: 1330266650
 mas "Keka", id: 470158793
@@ -47,17 +59,30 @@ mas "Slack", id: 803453959
 mas "VPNAutoConnect", id: 532510878
 mas "Windows App", id: 1295203466
 mas "WireGuard", id: 1451685025
+mas "Yubico Authenticator", id: 1497506650
+
+# VS Code Extensions
 vscode "1password.op-vscode"
+vscode "4ops.terraform"
+vscode "anthropic.claude-code"
+vscode "computerliebe.gitea-workflow"
 vscode "dhoeric.ansible-vault"
-vscode "gamunu.opentofu"
+vscode "github.codespaces"
 vscode "github.copilot"
 vscode "github.copilot-chat"
-vscode "google.geminicodeassist"
+vscode "hashicorp.terraform"
+vscode "henriquebruno.github-repository-manager"
 vscode "ms-python.debugpy"
 vscode "ms-python.python"
 vscode "ms-python.vscode-pylance"
+vscode "ms-python.vscode-python-envs"
 vscode "ms-vscode-remote.remote-ssh"
 vscode "ms-vscode-remote.remote-ssh-edit"
+vscode "ms-vscode-remote.remote-wsl"
+vscode "ms-vscode.powershell"
 vscode "ms-vscode.remote-explorer"
+vscode "openai.chatgpt"
 vscode "redhat.ansible"
 vscode "redhat.vscode-yaml"
+vscode "wmaurer.change-case"
+vscode "wolfmah.ansible-vault-inline"

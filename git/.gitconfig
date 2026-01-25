@@ -8,48 +8,47 @@
 [core]
 	excludesfile = ~/.gitignore
 	editor = nano -r 72
-	
+
 [push]
-    default = current
+	default = current
 
 [color]
-  ui = true
+	ui = true
 
 [color "branch"]
-  current = white bold
-  local   = yellow
-  remote  = cyan
+	current = white bold
+	local = yellow
+	remote = cyan
 
 [color "diff"]
-  frag = cyan bold
-  meta = white
-  new = green bold
-  old = red bold
-  commit = yellow bold
-  whitespace = red reverse
+	frag = cyan bold
+	meta = white
+	new = green bold
+	old = red bold
+	commit = yellow bold
+	whitespace = red reverse
 
 [color "diff-highlight"]
-  oldNormal = red bold
-  oldHighlight = red bold 52
-  newNormal = green bold
-  newHighlight = green bold 22
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
 
 [color "status"]
-  untracked = cyan
+	untracked = cyan
 
 [commit]
-  template = ~/.gitmessage
+	template = ~/.gitmessage
 
 [alias]
-  clo = clone
-  co = checkout
-  st = status
-  pur = pull --rebase
-  ci = commit
-  rc = rebase --continue
-  lg = log -M --decorate --graph --oneline
-  br = branch
-  sth = stash
+	co = checkout
+	st = status
+	ci = commit
+	br = branch
+	lg = log -M --decorate --graph --oneline
+	pur = pull --rebase
+	rc = rebase --continue
+	sth = stash
 
 [url "git@github.com:"]
 	insteadOf = https://github.com/

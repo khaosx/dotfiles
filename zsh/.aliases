@@ -5,17 +5,44 @@
 # This file (or section) contains aliases for common commands.  They are
 # used to shorten commands and improve command-line efficiency.
 
+# Homebrew
 alias brewup='brew bundle; brew cleanup; brew doctor; brew bundle dump --force'
-alias makedots='$HOME/configs/link_configs_manual.sh'
-alias gitdots='cd $HOME/configs; git add -A; git commit -am "Routine Updates"; git push'
 
+# Dotfiles management
+alias makedots='$HOME/Projects/dotfiles/link_configs_manual.sh'
+alias gitdots='cd $HOME/Projects/dotfiles; git add -A; git commit -am "Routine Updates"; git push'
+
+# Ansible
 alias makerole='ansible-galaxy init --init-path=$HOME/admin/ansible/roles'
 alias aplay='ansible-playbook -i hosts'
 alias alint='ansible-lint'
 
-alias gadd='git add'
-alias gcom='git commit'
-alias gstat='git status'
-alias gpush='git push'
-alias hostkey='ssh-keygen -f .ssh/known_hosts -R '
-alias mtxt="merge_dir_to_txt"
+# Git (complements aliases in .gitconfig: co, st, ci, br, lg, pur, rc, sth)
+alias ga='git add'
+alias gp='git push'
+alias gl='git pull'
+
+# SSH key management - removes old host keys and adds fresh ones
+keyfix() {
+  local host="${1:?Usage: keyfix <hostname>}"
+  local ip=""
+
+  # Resolve IP using dig (with fallback to dscacheutil on macOS)
+  if (( $+commands[dig] )); then
+    ip=$(dig +short "$host" | tail -n1)
+  elif (( $+commands[dscacheutil] )); then
+    ip=$(dscacheutil -q host -a name "$host" | awk '/ip_address/ {print $2; exit}')
+  else
+    echo "Warning: Could not resolve IP (neither 'dig' nor 'dscacheutil' found)."
+  fi
+
+  # Remove old keys
+  ssh-keygen -R "$host" &> /dev/null
+  [[ -n "$ip" ]] && ssh-keygen -R "$ip" &> /dev/null
+
+  # Add fresh keys
+  ssh-keyscan -H "$host" >> ~/.ssh/known_hosts 2>/dev/null
+  [[ -n "$ip" ]] && ssh-keyscan -H "$ip" >> ~/.ssh/known_hosts 2>/dev/null
+
+  echo "Refreshed keys for $host${ip:+ ($ip)}"
+}
