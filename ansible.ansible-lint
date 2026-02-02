@@ -1,0 +1,11 @@
+quiet: true    
+verbosity: 1   
+parseable: true
+
+exclude_paths:
+  - .vscode/  
+  - .github/
+
+skip_list:
+  - experimental
+

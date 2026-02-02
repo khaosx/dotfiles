@@ -1,15 +1,12 @@
-# .zshrc - Zsh Profile Configuration
+# .zshrc.tpl - Zsh Profile Configuration
+# Managed by 1Password (op inject)
 # Author: Kristopher Newman
-# Date: 2025-02-05
 #
 # This file is sourced whenever a new interactive non-login shell is started.
-# It is used to set aliases, define functions, set shell options, and customize
-# the shell environment for interactive use.
-#
-# Note: Changes to this file require opening a new terminal or sourcing the file
-#       for the changes to take effect. (source ~/.zshrc)
+# It is generated from a template in the dotfiles repo.
 
 # Aliases:
+# This sources the file generated from .aliases.tpl
 if [ -f ~/.aliases ]
 then
   source ~/.aliases
@@ -27,4 +24,6 @@ export CLICOLOR_FORCE=1
 export PROMPT='%F{green}%n@%m%f %F{blue}%~%f $ '
 
 # Path modifications:
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="$PATH:/Users/kris/scripts:/usr/local/sbin:$HOME/.local/bin"
+
+# EOF

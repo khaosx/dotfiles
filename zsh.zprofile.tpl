@@ -1,13 +1,8 @@
-# .zprofile - Zsh Profile Configuration
+# .zprofile.tpl - Zsh Profile Configuration
+# Managed by 1Password (op inject)
 # Author: Kristopher Newman
-# Date: 2025-02-05
 #
-# This file is sourced only once, at the start of an interactive login shell.
-# It is used to set environment variables, define functions, and run commands
-# that should be executed only upon login.
-#
-# Note: Changes to this file require a new login or sourcing the file
-#       for the changes to take effect.  (source ~/.zprofile)
+# This file is generated from a template. Do not edit ~/.zprofile directly.
 
 # Path modifications:
 export PATH="$HOME/bin:$PATH"
@@ -15,10 +10,16 @@ export PATH="$HOME/bin:$PATH"
 # Environment Variables:
 ## Set brew update to only run once a week
 export HOMEBREW_AUTO_UPDATE_SECS=604800
+
 ## Define location of Brew bundle
 export HOMEBREW_BUNDLE_FILE="$HOME/.Brewfile"
+
 ## Set location for ansible config file
 export ANSIBLE_CONFIG="$HOME/.ansible.cfg"
+
+## 1Password Injected Secrets
+## This pulls the vault password from 1Password during the bootstrap process
+export ANSIBLE_VAULT_PASSWORD="{{ op://khaosx-infrastructure/pfkutx4v5qzxgmoehc3wjn2ugy/ANSIBLE_VAULT_PASSWORD }}"
 
 ## I won't fucking use VIM, ever. Stop trying to make it a thing.
 export EDITOR=nano

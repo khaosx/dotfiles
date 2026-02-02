@@ -1,26 +1,15 @@
-# .aliases - Zsh Command Aliases
+# .aliases.tpl - Zsh Command Aliases
+# Managed by 1Password (op inject)
 # Author: Kristopher Newman
-# Date: 2025-02-05
 #
-# This file (or section) contains aliases for common commands.  They are
-# used to shorten commands and improve command-line efficiency.
+# This file contains aliases and functions for common commands. 
+# It is used to generate the local ~/.aliases file.
 
 # Homebrew
 alias brewup='brew bundle; brew cleanup; brew doctor; brew bundle dump --force'
 
-# Dotfiles management
-alias makedots='$HOME/Projects/dotfiles/link_configs_manual.sh'
-alias gitdots='cd $HOME/Projects/dotfiles; git add -A; git commit -am "Routine Updates"; git push'
-
 # Ansible
-alias makerole='ansible-galaxy init --init-path=$HOME/admin/ansible/roles'
-alias aplay='ansible-playbook -i hosts'
-alias alint='ansible-lint'
-
-# Git (complements aliases in .gitconfig: co, st, ci, br, lg, pur, rc, sth)
-alias ga='git add'
-alias gp='git push'
-alias gl='git pull'
+alias makerole='ansible-galaxy init --init-path=$HOME/Projects/ansible.infrastructure/roles'
 
 # SSH key management - removes old host keys and adds fresh ones
 keyfix() {

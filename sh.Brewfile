@@ -1,6 +1,5 @@
 tap "hashicorp/tap"
-
-# CLI Tools
+brew "tree"
 brew "ansible"
 brew "ansible-lint"
 brew "cask"
@@ -13,26 +12,19 @@ brew "mas"
 brew "midnight-commander"
 brew "node"
 brew "pipx"
-brew "tree"
 brew "wget"
 brew "hashicorp/tap/packer"
 brew "hashicorp/tap/terraform"
-
-# Applications
 cask "1password"
 cask "1password-cli"
 cask "bambu-studio"
 cask "claude-code"
 cask "google-chrome"
 cask "iina"
-cask "makemkv"
 cask "microsoft-edge"
 cask "plex"
 cask "powershell"
 cask "visual-studio-code"
-
-# Mac App Store
-mas "AudioBookBinder", id: 413969927
 mas "AutoMounter", id: 1160435653
 mas "Blackmagic Disk Speed Test", id: 425264550
 mas "ControllerForHomeKit", id: 1198176727
@@ -58,8 +50,6 @@ mas "VPNAutoConnect", id: 532510878
 mas "Windows App", id: 1295203466
 mas "WireGuard", id: 1451685025
 mas "Yubico Authenticator", id: 1497506650
-
-# VS Code Extensions
 vscode "1password.op-vscode"
 vscode "4ops.terraform"
 vscode "anthropic.claude-code"
@@ -68,6 +58,7 @@ vscode "dhoeric.ansible-vault"
 vscode "github.codespaces"
 vscode "github.copilot"
 vscode "github.copilot-chat"
+vscode "google.geminicodeassist"
 vscode "hashicorp.terraform"
 vscode "henriquebruno.github-repository-manager"
 vscode "ms-python.debugpy"
