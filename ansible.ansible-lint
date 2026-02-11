@@ -8,4 +8,5 @@ exclude_paths:
 
 skip_list:
   - experimental
+  - var-naming[no-role-prefix]
 
