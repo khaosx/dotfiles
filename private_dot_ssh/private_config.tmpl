@@ -1,0 +1,39 @@
+# private_dot_ssh/config.tmpl - SSH Client Configuration
+# Managed by Chezmoi
+# Author: Kristopher Newman
+#
+# DO NOT edit ~/.ssh/config directly - edit this template instead and run: chezmoi apply
+# File permissions are managed by Chezmoi (private_ prefix enforces 600)
+
+## --------------------- Specific Host Definitions --------------------- ##
+##   --------------------- Managed by 1Password ---------------------    ##
+##
+## The following block is injected from a 1Password Secure Note. It
+## contains specific host definitions for the internal network.
+
+{{ onepasswordRead "op://khaosx-infrastructure/pfkutx4v5qzxgmoehc3wjn2ugy/SSH_Specific Hosts_Config" }}
+
+## --------------------- Global Defaults --------------------- ##
+##
+## These settings apply to ALL hosts unless overridden by any
+## block above.
+
+Host *
+    ForwardAgent        no
+    ForwardX11          no
+    Protocol            2
+    ControlMaster       auto
+    ConnectTimeout      10
+    ServerAliveInterval 60
+    ServerAliveCountMax 30
+
+    # --- Default Credentials ---
+    User {{ onepasswordRead "op://khaosx-infrastructure/Admin User/username" }}
+    IdentityFile        ~/.ssh/id_ed25519_jarvis
+
+    # 1Password SSH agent socket - platform specific
+    {{- if eq .chezmoi.os "darwin" }}
+    IdentityAgent       "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+    {{- else if eq .chezmoi.os "linux" }}
+    IdentityAgent       "~/.1password/agent.sock"
+    {{- end }}

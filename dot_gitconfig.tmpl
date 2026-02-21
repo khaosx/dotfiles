@@ -1,9 +1,19 @@
+# dot_gitconfig.tmpl - Git Configuration
+# Managed by Chezmoi
+# Author: Kristopher Newman
+#
+# DO NOT edit ~/.gitconfig directly - edit this template and run: chezmoi apply
+
 [user]
 	name = khaosx
 	email = misterk71@gmail.com
 
 [credential]
+{{- if eq .chezmoi.os "darwin" }}
 	helper = osxkeychain
+{{- else if eq .chezmoi.os "linux" }}
+	helper = /usr/lib/git-core/git-credential-libsecret
+{{- end }}
 
 [core]
 	excludesfile = ~/.gitignore

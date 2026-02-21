@@ -1,14 +1,14 @@
-# .zshrc.tpl - Zsh Profile Configuration
-# Managed by 1Password (op inject)
+# dot_zshrc.tmpl - Zsh Interactive Shell Configuration
+# Managed by Chezmoi
 # Author: Kristopher Newman
 #
 # This file is sourced whenever a new interactive non-login shell is started.
 # It is generated from a template in the dotfiles repo.
+# DO NOT edit ~/.zshrc directly - edit this template instead and run: chezmoi apply
 
 # Aliases:
-# This sources the file generated from .aliases.tpl
-if [ -f ~/.aliases ]
-then
+# This sources the file generated from dot_aliases.tmpl
+if [ -f ~/.aliases ]; then
   source ~/.aliases
 fi
 
@@ -24,6 +24,7 @@ export CLICOLOR_FORCE=1
 export PROMPT='%F{green}%n@%m%f %F{blue}%~%f $ '
 
 # Path modifications:
-export PATH="$PATH:/Users/kris/scripts:/usr/local/sbin:$HOME/.local/bin"
+# Note: Using $HOME instead of hardcoded /Users/kris for cross-platform compatibility
+export PATH="$HOME/scripts:/usr/local/sbin:$HOME/.local/bin:$PATH"
 
 # EOF

@@ -1,12 +1,14 @@
-# .aliases.tpl - Zsh Command Aliases
-# Managed by 1Password (op inject)
+# dot_aliases.tmpl - Zsh Command Aliases
+# Managed by Chezmoi
 # Author: Kristopher Newman
 #
-# This file contains aliases and functions for common commands. 
-# It is used to generate the local ~/.aliases file.
+# This file contains aliases and functions for common commands.
+# DO NOT edit ~/.aliases directly - edit this template instead and run: chezmoi apply
 
-# Homebrew
+# Homebrew (macOS only)
+{{- if eq .chezmoi.os "darwin" }}
 alias brewup='brew bundle; brew cleanup; brew doctor; brew bundle dump --force'
+{{- end }}
 
 # Ansible
 alias makerole='ansible-galaxy init --init-path=$HOME/Projects/ansible.infrastructure/roles'
@@ -19,10 +21,12 @@ keyfix() {
   # Resolve IP using dig (with fallback to dscacheutil on macOS)
   if (( $+commands[dig] )); then
     ip=$(dig +short "$host" | tail -n1)
+  {{- if eq .chezmoi.os "darwin" }}
   elif (( $+commands[dscacheutil] )); then
     ip=$(dscacheutil -q host -a name "$host" | awk '/ip_address/ {print $2; exit}')
+  {{- end }}
   else
-    echo "Warning: Could not resolve IP (neither 'dig' nor 'dscacheutil' found)."
+    echo "Warning: Could not resolve IP (no supported resolver found)."
   fi
 
   # Remove old keys
@@ -35,3 +39,5 @@ keyfix() {
 
   echo "Refreshed keys for $host${ip:+ ($ip)}"
 }
+
+# EOF

@@ -1,0 +1,46 @@
+# dot_zprofile.tmpl - Zsh Login Profile Configuration
+# Managed by Chezmoi
+# Author: Kristopher Newman
+#
+# This file is sourced for login shells.
+# DO NOT edit ~/.zprofile directly - edit this template instead and run: chezmoi apply
+
+# Path modifications:
+export PATH="$HOME/bin:$PATH"
+
+# Environment Variables:
+
+## Set location for ansible config file (cross-platform)
+export ANSIBLE_CONFIG="$HOME/.ansible.cfg"
+
+## Ansible Vault password - injected from 1Password at apply time
+export ANSIBLE_VAULT_PASSWORD="{{ onepasswordRead "op://khaosx-infrastructure/pfkutx4v5qzxgmoehc3wjn2ugy/ANSIBLE_VAULT_PASSWORD" }}"
+
+## Talos / Kubernetes config
+export TALOSCONFIG=~/.talos/k8s-clst-01.yaml
+export KUBECONFIG=~/.kube/k8s-clst-01.yaml
+
+## I won't use VIM, ever. Stop trying to make it a thing.
+export EDITOR=nano
+
+# macOS-specific configuration
+{{- if eq .chezmoi.os "darwin" }}
+
+## Homebrew configuration
+eval "$(/opt/homebrew/bin/brew shellenv)"
+export HOMEBREW_AUTO_UPDATE_SECS=604800
+export HOMEBREW_BUNDLE_FILE="$HOME/.Brewfile"
+
+{{- end }}
+
+# Linux / WSL2-specific configuration
+{{- if eq .chezmoi.os "linux" }}
+
+## Linuxbrew (if installed), otherwise skip
+if [ -f /home/linuxbrew/.linuxbrew/bin/brew ]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
+
+{{- end }}
+
+# EOF
