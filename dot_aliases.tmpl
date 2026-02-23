@@ -13,6 +13,21 @@ alias brewup='brew bundle; brew cleanup; brew doctor; brew bundle dump --force'
 # Ansible
 alias makerole='ansible-galaxy init --init-path=$HOME/Projects/ansible.infrastructure/roles'
 
+# Chezmoi quick reference
+chezhelp() {
+  cat <<'EOF'
+chezmoi quick reference
+  chezmoi status          # what changed locally
+  chezmoi diff            # preview changes before apply
+  chezmoi edit <file>     # edit a managed file
+  chezmoi add <file>      # start managing a file
+  chezmoi apply           # apply templates to $HOME
+  chezmoi update          # pull latest dotfiles + apply
+  chezmoi cd              # open source dir in a subshell
+EOF
+}
+alias czh='chezhelp'
+
 # SSH key management - removes old host keys and adds fresh ones
 keyfix() {
   local host="${1:?Usage: keyfix <hostname>}"
